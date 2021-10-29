@@ -5,7 +5,7 @@ require('alpinejs');
 import { createApp } from "vue";
 import router from './router';
 
-import App from "./components/App";
+import App from "./layouts/App";
 
 createApp({
     components: {
