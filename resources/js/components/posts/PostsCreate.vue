@@ -40,29 +40,19 @@
     </form>
 </template>
 
-<script>
+<script setup>
 import { reactive } from "vue";
 import usePosts from "../../composables/posts";
 
-export default {
-    setup() {
-        const { errors, storePost } = usePosts();
+const { errors, storePost } = usePosts();
 
-        const form = reactive({
-            'title': '',
-            'text': '',
-            'image': '',
-        });
+const form = reactive({
+    'title': '',
+    'text': '',
+    'image': '',
+});
 
-        const savePost = async () => {
-            await storePost({...form});
-        };
-
-        return {
-            form,
-            errors,
-            savePost
-        }
-    }
-}
+const savePost = async () => {
+    await storePost({...form});
+};
 </script>

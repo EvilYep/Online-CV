@@ -40,33 +40,22 @@
     </form>
 </template>
 
-<script>
+<script setup>
 import usePosts from "../../composables/posts";
 import { onMounted } from "vue";
 
-export default {
-    props: {
-        id: {
-            required: true,
-            type: String
-        }
-    },
-
-    setup(props) {
-        const { post, getPost, updatePost, errors } = usePosts();
-
-        onMounted(getPost(props.id));
-
-        const savePost = async () => {
-            await updatePost(props.id);
-        }
-
-        return {
-            post,
-            errors,
-            getPost,
-            savePost,
-        }
+const props = defineProps({
+    id: {
+        required: true,
+        type: String
     }
+})
+
+const { post, getPost, updatePost, errors } = usePosts();
+
+onMounted(getPost(props.id));
+
+const savePost = async () => {
+    await updatePost(props.id);
 }
 </script>

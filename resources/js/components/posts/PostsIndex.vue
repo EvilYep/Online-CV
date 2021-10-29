@@ -57,29 +57,20 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import usePosts from "../../composables/posts";
 import { onMounted } from "vue";
 
-export default {
-    setup() {
-        const { posts, getPosts, destroyPost } = usePosts();
+const { posts, getPosts, destroyPost } = usePosts();
 
-        onMounted(getPosts);
+onMounted(getPosts);
 
-        const deletePost = async (id) => {
-            if(!window.confirm('Are you cereal ?')) {
-                return;
-            }
-
-            await destroyPost(id);
-            await getPosts();
-        }
-
-        return {
-            posts,
-            deletePost,
-        }
+const deletePost = async (id) => {
+    if(!window.confirm('Are you cereal ?')) {
+        return;
     }
+
+    await destroyPost(id);
+    await getPosts();
 }
 </script>
