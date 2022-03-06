@@ -3,28 +3,41 @@ import {ref} from "vue";
 export default function initApp() {
     const themeRotation = {
         light: 'dark',
-        dark: 'nineties',
-        nineties: 'light',
+        dark: 'retro',
+        retro: 'light',
     };
-    let theme = 'light';
+    let theme = ref('light');
     let bodyClasses = [];
 
     function setInitialTheme() {
-        theme = localStorage.getItem('theme') || Object.keys(themeRotation)[0];
+        theme.value = localStorage.getItem('theme') || Object.keys(themeRotation)[0];
         bodyClasses = document.getElementsByTagName('html')[0].classList;
-        bodyClasses.add(theme);
+        bodyClasses.add(theme.value);
         saveTheme();
     }
 
     function rotateThemes() {
-        let next = themeRotation[theme];
-        bodyClasses.replace(theme, next);
-        theme = next;
+        theme.value = localStorage.getItem('theme') || Object.keys(themeRotation)[0];
+        let next = themeRotation[theme.value];
+        bodyClasses = document.getElementsByTagName('html')[0].classList;
+        bodyClasses.replace(theme.value, next);
+        theme.value = next;
+        saveTheme();
+    }
+
+    function logTheme(th) {
+        console.log(th);
+    }
+
+    function setTheme(th) {
+        bodyClasses = document.getElementsByTagName('html')[0].classList;
+        bodyClasses.replace(theme.value, th);
+        theme.value = th;
         saveTheme();
     }
 
     function saveTheme() {
-        localStorage.setItem('theme', theme);
+        localStorage.setItem('theme', theme.value);
     }
 
     return {
@@ -33,5 +46,7 @@ export default function initApp() {
         bodyClasses,
         setInitialTheme,
         rotateThemes,
+        logTheme,
+        setTheme,
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Hunt hour binding metals succumbed Gríma arrow.</h1>
+        <h1 :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">Hunt hour binding metals succumbed Gríma arrow.</h1>
         <p>Galadriel craft many! Prey lesser woodland matter finest visitors vale Captain plunder voices. Curse you and all the halflings!</p>
         <h2>Goodness resolved distinct Anor uncle 24th resisted.</h2>
         <p>Gandalf the Grey splintered nightly decay places snaffle carried. Foreseen gotta strike recall unnoticed Treebeard's list stink inquiries head. Bathroom golden-red fox until fool's selling imagine you're Agreed days. Fly, you fools!</p>

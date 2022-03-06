@@ -12,6 +12,7 @@
     --pink-primary: #ff7eee;
     --pink-secondary: #df49a6;
     --transition-speed: 600ms;
+    --transition-speed-slower: 1200ms;
     font-size: 16px;
 }
 
@@ -36,6 +37,7 @@ body {
     font-family: 'Heebo', 'Roboto', Arial, sans-serif;
     line-height: 20px;
     width: 100vw;
+    transition: background var(--transition-speed) ease-in-out, color var(--transition-speed-slower) ease-in-out;
 }
 body::-webkit-scrollbar {
     width: 0.5rem;
@@ -49,6 +51,15 @@ body::-webkit-scrollbar-thumb {
 
 #app {
     min-height: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 /*******************
@@ -78,8 +89,8 @@ body::-webkit-scrollbar-thumb {
     position: fixed;
     background-color: var(--nav-bg-primary);
     transition: width var(--transition-speed) ease-in-out;
-    overflow-x: scroll;
     scrollbar-width: none;
+    overflow: visible;
 }
 .navbar::-webkit-scrollbar {
     display: none;
@@ -111,7 +122,8 @@ body::-webkit-scrollbar-thumb {
     filter: grayscale(100%) opacity(0.7);
     transition: var(--transition-speed);
 }
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.has-dropdown:focus-within {
     filter: grayscale(0%) opacity(1);
     color: var(--nav-text-secondary);
     background: var(--nav-bg-secondary);
@@ -155,6 +167,21 @@ body::-webkit-scrollbar-thumb {
     transition: var(--transition-speed);
 }
 
+@keyframes color-rotate {
+    from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.retro .nav-link:hover svg {
+    animation: color-rotate 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 /***************
 *    THEMES    *
 ***************/
@@ -185,7 +212,7 @@ body::-webkit-scrollbar-thumb {
     --btn-secondary:var(--green-secondary);
 }
 
-.nineties {
+.retro {
     --text-primary: #576e75;
     --text-secondary: #35535c;
     --bg-primary: #fdf6e3;
@@ -198,39 +225,72 @@ body::-webkit-scrollbar-thumb {
     --btn-secondary:var(--pink-secondary);
 }
 
-.theme-icon {
-    display: none;
+/*********************
+*    THEME PICKER    *
+*********************/
+
+.dropdown {
+    position: absolute;
+    opacity: 0;
+    z-index: 2;
+    background: blue;
+    border: 2px solid var(--text-primary);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 0.5rem;
+    box-shadow: rgba(2, 8, 20, 0.1) 0 0.175em 0.5em;
+    transition: var(--transition-speed) ease-out;
 }
-.dark #darkIcon {
-    display: block;
+
+.has-dropdown:focus-within .dropdown{
+    opacity: 1;
+    filter: grayscale(0%);
 }
-.light #lightIcon {
-    display: block;
+
+.dropdown-item {
+    width: max-content;
 }
-.nineties #nineties {
-    display: block;
+
+.dropdown-item a {
+    width: 100%;
+    height: 100%;
+    size: 0.7rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.dropdown-item a::before {
+    content: ' ';
+    border: 2px solid var(--text-primary);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.dropdown-item a#dark::before {
+    background: #1c2128;
+}
+
+.dropdown-item a#light::before {
+    background: #ececec;
+}
+
+.dropdown-item a#retro::before {
+    background: linear-gradient(34deg, rgba(59,0,253,1) 0%, rgba(0,249,42,1) 12%, rgba(4,202,244,1) 38%, rgba(249,6,214,1) 64%, rgba(209,246,10,1) 80%);
 }
 
 /*************
 *    MISC    *
 *************/
 
-select {
-    color: var(--bg-secondary);
-    background-color: var(--btn-primary);
-    @apply font-bold block appearance-none py-3 px-4 leading-tight border border-gray-500 focus:outline-none;
-    transition: all 200ms ease-in-out;
-    cursor: pointer;
-}
-
 .btn:hover {
     background-color: var(--btn-secondary);
-}
-
-.theme-picker {
-    position: fixed;
-    top: 15px;
-    right: 15px;
 }
 
 /***********************
@@ -274,13 +334,9 @@ select {
         display: none;
     }
 
-    .theme-picker {
-        top: 0;
-        right: 0;
-    }
-
-    .theme-picker label {
-        display: none;
+    .dropdown {
+        margin-bottom: 13rem;
+        transform: translateX(-40%);
     }
 }
 
@@ -308,5 +364,10 @@ select {
 
     .navbar:hover .logo-text {
         left: 0;
+    }
+
+    .dropdown {
+        margin-left: 15rem;
+        transform: translateY(-40%);
     }
 }

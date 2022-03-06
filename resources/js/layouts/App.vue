@@ -17,7 +17,7 @@
                         </router-link>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" @click="rotateThemes">
                         <a href="#" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path fill="currentColor"
@@ -31,7 +31,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" @click="logTheme(theme)">
                         <a href="#" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                 <path fill="currentColor"
@@ -72,8 +72,8 @@
                         </a>
                     </li>
 
-                    <li class="nav-item" @click="rotateThemes">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'about' }" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                 <path fill="currentColor"
                                       d="M32 416c0 35.35 21.49 64 48 64h16V352H32zm154.54-232h280.13L376 168C243 140.59 222.45 51.22 128 34.65V160h18.34a45.62 45.62 0 0 1 40.2 24zM32 96v64h64V32H80c-26.51 0-48 28.65-48 64zm114.34 256H128v125.35C222.45 460.78 243 371.41 376 344l90.67-16H186.54a45.62 45.62 0 0 1-40.2 24z"
@@ -83,11 +83,11 @@
                                       class="fa-primary"></path>
                             </svg>
                             <span class="link-text">Divers</span>
-                        </a>
+                        </router-link>
                     </li>
 
                     <li class="nav-item">
-                        <router-link :to="{ name: 'about' }" class="nav-link">
+                        <a href="#" class="nav-link has-dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path fill="currentColor"
                                       d="M320 32L304 0l-16 32-32 16 32 16 16 32 16-32 32-16zm138.7 149.3L432 128l-26.7 53.3L352 208l53.3 26.7L432 288l26.7-53.3L512 208z"
@@ -96,27 +96,32 @@
                                       d="M332.2 426.4c8.1-1.6 13.9 8 8.6 14.5a191.18 191.18 0 0 1-149 71.1C85.8 512 0 426 0 320c0-120 108.7-210.6 227-188.8 8.2 1.6 10.1 12.6 2.8 16.7a150.3 150.3 0 0 0-76.1 130.8c0 94 85.4 165.4 178.5 147.7z"
                                       class="fa-primary"></path>
                             </svg>
-                            <span class="link-text">À Propos</span>
-                        </router-link>
+                            <span class="link-text">Thème</span>
+                            <ul class="dropdown">
+                                <li class="dropdown-item px-2 py-2">
+                                    <a href="#" @click="setTheme('dark')" id="dark">dark</a>
+                                </li>
+                                <li class="dropdown-item px-2 py-2">
+                                    <a href="#" @click="setTheme('light')" id="light">light</a>
+                                </li>
+                                <li class="dropdown-item px-2 py-2">
+                                    <a href="#" @click="setTheme('retro')" id="retro">retro</a>
+                                </li>
+                            </ul>
+<!--                            <nav class="theme-picker fixed invisible group-hover:visible">-->
+<!--                                <ul>-->
+<!--                                    <li><a href="#" @click="setTheme('dark')">Dark</a></li>-->
+<!--                                    <li><a href="#" @click="setTheme('light')">Light</a></li>-->
+<!--                                    <li><a href="#" @click="setTheme('nineties')">Nineties</a></li>-->
+<!--                                </ul>-->
+<!--                            </nav>-->
+                        </a>
                     </li>
 
                 </ul>
             </nav>
 
-            <router-view class="ml-20 px-6 pt-5"></router-view>
-        </div>
-
-        <div class="theme-picker">
-            <label class="block uppercase tracking-wide text-xs font-bold mb-2 text-center" for="theme-picker">
-                Thème
-            </label>
-            <div class="relative">
-                <select class="btn rounded-bl-lg sm:rounded-lg" id="theme-picker">
-                    <option class="bg-white">New Mexico</option>
-                    <option class="bg-white">Missouri</option>
-                    <option class="bg-white">Texas</option>
-                </select>
-            </div>
+            <router-view class="ml-20 px-6 pt-5" :theme="theme"></router-view>
         </div>
     </div>
 
@@ -126,7 +131,7 @@
 import initApp from "../composables/app";
 import { onMounted } from "vue";
 
-const { setInitialTheme, rotateThemes, } = initApp();
+const { setInitialTheme, logTheme, rotateThemes, theme, setTheme } = initApp();
 
 onMounted(setInitialTheme);
 </script>
