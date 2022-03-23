@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h1 :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">Hunt hour binding metals succumbed Gríma arrow.</h1>
+        <h1 :class="theme === 'retro' ? 'font-effect-neon' : ''">Hunt hour binding metals succumbed Gríma arrow.</h1>
         <p>Galadriel craft many! Prey lesser woodland matter finest visitors vale Captain plunder voices. Curse you and all the halflings!</p>
-        <h2>Goodness resolved distinct Anor uncle 24th resisted.</h2>
+        <h2>Goodness resolved <a href="#">distinct Anor uncle 24th</a> resisted.</h2>
         <p>Gandalf the Grey splintered nightly decay places snaffle carried. Foreseen gotta strike recall unnoticed Treebeard's list stink inquiries head. Bathroom golden-red fox until fool's selling imagine you're Agreed days. Fly, you fools!</p>
         <h3>Staff amidst dishcloth freed offered Dimholt astride problem.</h3>
         <p>Light's plate unite prey alerts wishing Crebain. I can cut across country easily enough. Everyone's sorry keen unspoiled every endless drain boarded noticed notion Bar-hrum leader.</p>

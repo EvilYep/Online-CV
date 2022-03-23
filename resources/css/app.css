@@ -7,7 +7,7 @@
 ****************/
 
 :root {
-    --green-primary: #10c856 ;
+    --green-primary: #81f5ad ;
     --green-secondary: #0fb64e ;
     --pink-primary: #ff7eee;
     --pink-secondary: #df49a6;
@@ -36,7 +36,7 @@ body {
     min-height: 100%;
     font-family: 'Heebo', 'Roboto', Arial, sans-serif;
     line-height: 20px;
-    width: 100vw;
+    width: 100%;
     transition: background var(--transition-speed) ease-in-out, color var(--transition-speed-slower) ease-in-out;
 }
 body::-webkit-scrollbar {
@@ -51,6 +51,10 @@ body::-webkit-scrollbar-thumb {
 
 #app {
     min-height: 100%;
+}
+
+.custom-container {
+    min-height: 300px;
 }
 
 ul {
@@ -91,6 +95,7 @@ a {
     transition: width var(--transition-speed) ease-in-out;
     scrollbar-width: none;
     overflow: visible;
+    z-index: 999;
 }
 .navbar::-webkit-scrollbar {
     display: none;
@@ -119,8 +124,11 @@ a {
     height: 5rem;
     color: var(--nav-text-primary);
     text-decoration: none;
-    filter: grayscale(100%) opacity(0.7);
     transition: var(--transition-speed);
+}
+.light .nav-link,
+.dark .nav-link {
+    filter: grayscale(100%) opacity(0.7);
 }
 .nav-link:hover,
 .nav-link.has-dropdown:focus-within {
@@ -176,12 +184,6 @@ a {
     }
 }
 
-.retro .nav-link:hover svg {
-    animation: color-rotate 5s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
 /***************
 *    THEMES    *
 ***************/
@@ -213,16 +215,94 @@ a {
 }
 
 .retro {
-    --text-primary: #576e75;
-    --text-secondary: #35535c;
-    --bg-primary: #fdf6e3;
-    --bg-secondary: #f5e5b8;
+    --text-primary: #35535c;
+    --text-secondary: #141418;
+    --bg-primary: #2d333b;
+    --bg-secondary: #141418;
     --nav-text-primary: #fdf6e3;
     --nav-text-secondary: #f5e5b8;
-    --nav-bg-primary: #576e75;
-    --nav-bg-secondary: #35535c;
-    --btn-primary:var(--pink-primary);
-    --btn-secondary:var(--pink-secondary);
+    --nav-bg-primary: #2d333b;
+    --nav-bg-secondary: #22272e;
+    --btn-primary: #fbd8a2 ;
+    --btn-secondary: #f5a01f;
+}
+
+/*********************
+*    RETRO THEME     *
+*********************/
+
+#netscape {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 999;
+}
+
+#konami {
+    position: absolute;
+    top: 2.5rem;
+    right: 5rem;
+    z-index: -1;
+}
+
+#floppy-disk {
+    position: absolute;
+    bottom: -8rem;
+    right: 81.5vw;
+    z-index: 2;
+}
+
+.retro body {
+    font-family: 'Times New Roman', sans-serif;
+}
+
+.retro .logo-text {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.retro a {
+    color: blue;
+    text-decoration: underline;
+}
+
+.retro a:visited {
+    color: blueviolet;
+}
+
+.retro .link-text {
+    font-weight: bold;
+}
+
+.retro .nav-link:hover svg {
+    animation: color-rotate 5s infinite;
+}
+
+.retro .custom-container {
+    height: 100%;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, .65);
+}
+
+@supports ((-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))) {
+    .retro .custom-container {
+        background-color: rgba(255, 255, 255, .65);
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+    }
+}
+
+#retro-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -999;
+    display: none;
+}
+
+.retro #retro-background {
+    display: block;
 }
 
 /*********************
@@ -240,7 +320,7 @@ a {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-around;
-    padding: 0.5rem;
+    padding: 0;
     box-shadow: rgba(2, 8, 20, 0.1) 0 0.175em 0.5em;
     transition: var(--transition-speed) ease-out;
 }
@@ -251,7 +331,17 @@ a {
 }
 
 .dropdown-item {
-    width: max-content;
+    width: 100px;
+}
+.dropdown-item:first-child {
+    border-radius: 8px 8px 0 0;
+}
+.dropdown-item:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.dropdown-item:hover {
+    background: var(--bg-secondary);
 }
 
 .dropdown-item a {
@@ -283,6 +373,7 @@ a {
 
 .dropdown-item a#retro::before {
     background: linear-gradient(34deg, rgba(59,0,253,1) 0%, rgba(0,249,42,1) 12%, rgba(4,202,244,1) 38%, rgba(249,6,214,1) 64%, rgba(209,246,10,1) 80%);
+    animation: color-rotate 5s infinite;
 }
 
 /*************
@@ -338,6 +429,25 @@ a {
         margin-bottom: 13rem;
         transform: translateX(-40%);
     }
+
+    .custom-container {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    #netscape {
+        bottom: 5.5rem;
+    }
+
+    #konami {
+        right: -1rem;
+        z-index: -1;
+    }
+
+    #floppy-disk {
+        left: -1rem;
+        z-index: -1;
+    }
 }
 
 /* Large Screens */
@@ -373,5 +483,10 @@ a {
 
     .navbar:hover .dropdown {
         margin-left: 15rem;
+    }
+
+    .custom-container {
+        width: 75%;
+        margin: 100px auto;
     }
 }

@@ -1,10 +1,17 @@
 <template>
+    <canvas width="500" height="200" id="retro-background"></canvas>
+    <button v-if="theme === 'retro'" id="netscape">
+        <img src="/img/netscape.gif" alt="netscape banner ad">
+    </button>
+    <img v-if="theme === 'retro'" src="/img/konami.png" alt="konami code" id="konami">
+    <img v-if="theme === 'retro'" src="/img/floppy-disk.png" alt="floppy disk" id="floppy-disk">
+
     <div>
         <nav class="navbar">
             <ul class="navbar-nav">
                 <li class="logo">
                     <router-link :to="{ name: 'home' }" class="nav-link">
-                        <span class="link-text logo-text">EvilYep</span>
+                        <span class="link-text logo-text" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">EvilYep</span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                             <path fill="currentColor"
                                   d="M224 273L88.37 409a23.78 23.78 0 0 1-33.8 0L32 386.36a23.94 23.94 0 0 1 0-33.89l96.13-96.37L32 159.73a23.94 23.94 0 0 1 0-33.89l22.44-22.79a23.78 23.78 0 0 1 33.8 0L223.88 239a23.94 23.94 0 0 1 .1 34z"
@@ -16,7 +23,7 @@
                     </router-link>
                 </li>
 
-                <li class="nav-item" @click="rotateThemes">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path fill="currentColor"
@@ -26,11 +33,11 @@
                                   d="M376 144a16 16 0 1 0 16 16 16 16 0 0 0-16-16zm80 0a16 16 0 1 0 16 16 16 16 0 0 0-16-16zM131.06 273.53L192 304l-23.52-70.56a192.06 192.06 0 0 0-37.42 40.09zM256 272v-77.11a198.62 198.62 0 0 0-43.15 12.38z"
                                   class="fa-primary"></path>
                         </svg>
-                        <span class="link-text">Accueil</span>
+                        <span class="link-text" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">Accueil</span>
                     </a>
                 </li>
 
-                <li class="nav-item" @click="logTheme(theme)">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                             <path fill="currentColor"
@@ -39,7 +46,7 @@
                             <path fill="currentColor" d="M160,320h64V224H160Zm192-96v96h64V224Z"
                                   class="fa-primary"></path>
                         </svg>
-                        <span class="link-text">CV</span>
+                        <span class="link-text" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">CV</span>
                     </a>
                 </li>
 
@@ -53,7 +60,7 @@
                                   d="M256,320c-90.52344,0-174.80469-13.23047-246.27344-35.73438a246.11376,246.11376,0,0,0,6.98438,35.998C87.28906,340.53906,168.65625,352,256,352s168.71094-11.46094,239.28906-31.73633a246.11376,246.11376,0,0,0,6.98438-35.998C430.80469,306.76953,346.52344,320,256,320Zm-64-80a80,80,0,1,0-80-80A80.00021,80.00021,0,0,0,192,240Zm0-104a24,24,0,1,1-24,24A23.99993,23.99993,0,0,1,192,136Z"
                                   class="fa-primary"></path>
                         </svg>
-                        <span class="link-text">Réalisations</span>
+                        <span class="link-text" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">Réalisations</span>
                     </a>
                 </li>
 
@@ -67,7 +74,7 @@
                                   d="M256,320c-90.52344,0-174.80469-13.23047-246.27344-35.73438a246.11376,246.11376,0,0,0,6.98438,35.998C87.28906,340.53906,168.65625,352,256,352s168.71094-11.46094,239.28906-31.73633a246.11376,246.11376,0,0,0,6.98438-35.998C430.80469,306.76953,346.52344,320,256,320Zm-64-80a80,80,0,1,0-80-80A80.00021,80.00021,0,0,0,192,240Zm0-104a24,24,0,1,1-24,24A23.99993,23.99993,0,0,1,192,136Z"
                                   class="fa-primary"></path>
                         </svg>
-                        <span class="link-text">Contact</span>
+                        <span class="link-text" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">Contact</span>
                     </a>
                 </li>
 
@@ -81,7 +88,7 @@
                                   d="M592.6 208.24C559.73 192.84 515.78 184 472 184H186.54a45.62 45.62 0 0 0-40.2-24H32c-23.2 0-32 10-32 24v144c0 14 8.82 24 32 24h114.34a45.62 45.62 0 0 0 40.2-24H472c43.78 0 87.73-8.84 120.6-24.24C622.28 289.84 640 272 640 256s-17.72-33.84-47.4-47.76zM488 296a8 8 0 0 1-8-8v-64a8 8 0 0 1 8-8c31.91 0 31.94 80 0 80z"
                                   class="fa-primary"></path>
                         </svg>
-                        <span class="link-text">Divers</span>
+                        <span class="link-text" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">Divers</span>
                     </router-link>
                 </li>
 
@@ -95,16 +102,16 @@
                                   d="M332.2 426.4c8.1-1.6 13.9 8 8.6 14.5a191.18 191.18 0 0 1-149 71.1C85.8 512 0 426 0 320c0-120 108.7-210.6 227-188.8 8.2 1.6 10.1 12.6 2.8 16.7a150.3 150.3 0 0 0-76.1 130.8c0 94 85.4 165.4 178.5 147.7z"
                                   class="fa-primary"></path>
                         </svg>
-                        <span class="link-text">Thème</span>
+                        <span class="link-text" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">Thème</span>
                         <ul class="dropdown">
                             <li class="dropdown-item px-2 py-2">
-                                <a href="#" @click="setTheme('dark')" id="dark">dark</a>
+                                <a href="#" @click="setTheme('dark')" id="dark" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">dark</a>
                             </li>
                             <li class="dropdown-item px-2 py-2">
-                                <a href="#" @click="setTheme('light')" id="light">light</a>
+                                <a href="#" @click="setTheme('light')" id="light" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">light</a>
                             </li>
                             <li class="dropdown-item px-2 py-2">
-                                <a href="#" @click="setTheme('retro')" id="retro">retro</a>
+                                <a href="#" @click="setTheme('retro')" id="retro" :class="theme === 'retro' ? 'font-effect-fire-animation' : ''">retro</a>
                             </li>
                         </ul>
                     </a>
@@ -113,15 +120,24 @@
             </ul>
         </nav>
 
-        <router-view class="ml-20 px-6 pt-5" :theme="theme"></router-view>
+        <div class="sm:ml-20">
+            <router-view class="px-6 py-5 custom-container" :theme="theme"></router-view>
+        </div>
     </div>
 </template>
 
 <script setup>
 import initApp from "../composables/app";
+import easterEgg from "../composables/easterEgg";
 import { onMounted } from "vue";
 
-const { setInitialTheme, logTheme, rotateThemes, theme, setTheme } = initApp();
+const { theme, setTheme, parallaxScroll, letsGo } = initApp();
+const { startEasterEggListener } = easterEgg();
 
-onMounted(setInitialTheme);
+onMounted(() => {
+    letsGo();
+    startEasterEggListener();
+    parallaxScroll('konami', 0.85);
+    parallaxScroll('floppy-disk', -0.35);
+});
 </script>

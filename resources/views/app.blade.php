@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Heebo:300,400,700&display=swap&effect=neon|fire-animation" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700&display=swap&effect=neon|fire-animation" rel="stylesheet"/>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
