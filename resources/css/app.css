@@ -233,7 +233,7 @@ a {
     position: absolute;
     opacity: 0;
     z-index: 2;
-    background: blue;
+    background: var(--bg-primary);
     border: 2px solid var(--text-primary);
     border-radius: 8px;
     display: flex;
@@ -367,7 +367,11 @@ a {
     }
 
     .dropdown {
-        margin-left: 15rem;
+        margin-left: 4.5rem;
         transform: translateY(-40%);
+    }
+
+    .navbar:hover .dropdown {
+        margin-left: 15rem;
     }
 }
